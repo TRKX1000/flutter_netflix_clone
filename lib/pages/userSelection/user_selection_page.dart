@@ -5,7 +5,12 @@ import 'package:flutter_netflix_clone/utils/image_assets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class UserSelectionPage extends StatefulWidget {
-  const UserSelectionPage({Key? key}) : super(key: key);
+  static const String keyRoute = "UserSelectionPage";
+  final void Function(User user) onUserClick;
+
+  const UserSelectionPage(
+      {Key? key, required Function(User user) this.onUserClick})
+      : super(key: key);
 
   @override
   State<UserSelectionPage> createState() => _UserSelectionPageState();
@@ -76,7 +81,8 @@ class _UserSelectionPageState extends State<UserSelectionPage> {
         shrinkWrap: true,
         itemCount: arrayAvatars.length,
         itemBuilder: (ctx, index) {
-          return UserSelectionAvatar(user: arrayAvatars[index]);
+          return UserSelectionAvatar(
+              user: arrayAvatars[index], onUserClick: widget.onUserClick);
         },
       ),
     );
