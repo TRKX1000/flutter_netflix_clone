@@ -2,19 +2,19 @@ part of 'movies_bloc.dart';
 
 @immutable
 abstract class MoviesState {
-  final List<Movie> movieList;
+  final MoviesInfo moviesInfo;
 
-  const MoviesState(this.movieList);
+  const MoviesState(this.moviesInfo);
 }
 
 class InitialMovieState extends MoviesState {
-  InitialMovieState() : super(<Movie>[]);
+  InitialMovieState() : super(MoviesInfo([]));
 }
 
 class LoadingMovieState extends MoviesState {
-  LoadingMovieState() : super(<Movie>[]);
+  LoadingMovieState() : super(MoviesInfo([]));
 }
 
 class MoviesOkState extends MoviesState {
-  const MoviesOkState(List<Movie> movieList) : super(movieList);
+  const MoviesOkState(MoviesInfo moviesInfo) : super(moviesInfo);
 }

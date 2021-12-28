@@ -1,4 +1,6 @@
 import 'package:flutter_netflix_clone/data/movie.dart';
+import 'package:flutter_netflix_clone/data/movie_section.dart';
+import 'package:flutter_netflix_clone/data/movies_info.dart';
 import 'package:flutter_netflix_clone/domain/service/movies_service.dart';
 
 class MoviesRepository {
@@ -6,10 +8,18 @@ class MoviesRepository {
 
   MoviesRepository(this.moviesService);
 
-  Future<List<Movie>> getMovies() async {
-    var moviesResponse = await moviesService.getPopularMovies();
-    var moviesList = moviesResponse.results.map(
+  Future<MoviesInfo> getMovies() async {
+    List<MovieSection> sectionList = [];
+
+    // get popular movies
+    var popularMoviesResponse = await moviesService.getPopularMovies();
+    var popularMoviesList = popularMoviesResponse.results.map(
         (movieResponse) => Movie.convertServiceModelToDataModel(movieResponse));
-    return moviesList.toList();
+    sectionList.add(
+        MovieSection("Popular Movies on Netflix", popularMoviesList.toList()));
+
+    var movieInfo = MoviesInfo(sectionList);
+
+    return movieInfo;
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_netflix_clone/bloc/movies/movies_bloc.dart';
+import 'package:flutter_netflix_clone/data/movie_section.dart';
 import 'package:flutter_netflix_clone/data/user.dart';
+import 'package:flutter_netflix_clone/pages/userHome/widget/horizontal_carousel.dart';
 
 class UserHomePage extends StatelessWidget {
   static const String keyRoute = "UserHomePage";
@@ -34,19 +36,7 @@ class UserHomePage extends StatelessWidget {
                   }
                 case MoviesOkState:
                   {
-                    return Center(
-                      child: ListView.builder(
-                        itemCount: state.movieList.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(
-                              state.movieList[index].title,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          );
-                        },
-                      ),
-                    );
+                    return _showUserMovies(state.moviesInfo.movieSections);
                   }
                 default:
                   {
@@ -64,6 +54,29 @@ class UserHomePage extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  Widget _showUserMovies(List<MovieSection> movieSectionlist) {
+    return ListView.builder(
+      itemCount: movieSectionlist.length,
+      itemBuilder: (context, index) {
+        return HorizontalCarouselWidget(
+          section: movieSectionlist[index],
+        );
+      },
+    );
+
+    // ListView.builder(
+    //   itemCount: movieList.length,
+    //   itemBuilder: (context, index) {
+    //     return ListTile(
+    //       title: Text(
+    //         movieList[index].title,
+    //         style: const TextStyle(color: Colors.white),
+    //       ),
+    //     );
+    //   },
+    // ),
   }
 
   Widget _showLoading() {

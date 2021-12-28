@@ -22,8 +22,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: AppRouter(),
+    return MaterialApp(
+      theme: ThemeData(fontFamily: 'Netflix Sans'),
+      home: const AppRouter(),
     );
   }
 }

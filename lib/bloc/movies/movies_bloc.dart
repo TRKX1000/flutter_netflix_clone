@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_netflix_clone/data/movie.dart';
+import 'package:flutter_netflix_clone/data/movies_info.dart';
 import 'package:flutter_netflix_clone/di/locator.dart';
 import 'package:flutter_netflix_clone/domain/repository/movies_repository.dart';
 import 'package:flutter_netflix_clone/domain/service/movies_service.dart';
@@ -15,14 +16,14 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       emit(LoadingMovieState());
     });
     on<MovieListEvent>((event, emit) async {
-      emit(MoviesOkState(event.movieList));
+      emit(MoviesOkState(event.moviesInfo));
     });
     on<TryToLoadMoviesEvent>((event, emit) async {
       emit(LoadingMovieState());
       
       var moviesRepository = MoviesRepository(locator.get<MoviesService>());
-      var movies = await moviesRepository.getMovies();
-      emit(MoviesOkState(movies));
+      var moviesInfo = await moviesRepository.getMovies();
+      emit(MoviesOkState(moviesInfo));
     });
   }
 
