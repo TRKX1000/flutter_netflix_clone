@@ -1,4 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_netflix_clone/data/movie.dart';
+import 'package:flutter_netflix_clone/di/locator.dart';
+import 'package:flutter_netflix_clone/domain/repository/movies_repository.dart';
+import 'package:flutter_netflix_clone/domain/service/movies_service.dart';
 import 'package:meta/meta.dart';
 
 part 'movies_event.dart';
@@ -15,14 +19,10 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     });
     on<TryToLoadMoviesEvent>((event, emit) async {
       emit(LoadingMovieState());
-      // TODO: call service
-      Future.delayed(const Duration(seconds: 3), () {
-        add(MovieListEvent(const [
-          "Avengers: End Game",
-          "Matrix Resurrections",
-          "Spiderman: No Way Home"
-        ]));
-      });
+      
+      var moviesRepository = MoviesRepository(locator.get<MoviesService>());
+      var movies = await moviesRepository.getMovies();
+      emit(MoviesOkState(movies));
     });
   }
 

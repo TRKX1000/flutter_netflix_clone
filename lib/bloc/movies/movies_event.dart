@@ -4,7 +4,7 @@ part of 'movies_bloc.dart';
 abstract class MoviesEvent {}
 
 class MovieListEvent extends MoviesEvent {
-  final List<String> movieList;
+  final List<Movie> movieList;
 
   MovieListEvent(this.movieList);
 }

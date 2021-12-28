@@ -40,7 +40,7 @@ class UserHomePage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(
-                              state.movieList[index],
+                              state.movieList[index].title,
                               style: const TextStyle(color: Colors.white),
                             ),
                           );
