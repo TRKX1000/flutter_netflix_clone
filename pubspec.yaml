@@ -76,6 +76,8 @@ flutter:
     - assets/images/ic_avatar_2.png
     - assets/images/ic_avatar_3.png
     - assets/images/ic_avatar_4.png
+    - assets/images/n_netflix.png
+    - assets/images/image_search.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

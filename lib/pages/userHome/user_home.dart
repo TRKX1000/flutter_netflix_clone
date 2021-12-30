@@ -4,6 +4,7 @@ import 'package:flutter_netflix_clone/bloc/movies/movies_bloc.dart';
 import 'package:flutter_netflix_clone/data/movie_section.dart';
 import 'package:flutter_netflix_clone/data/user.dart';
 import 'package:flutter_netflix_clone/pages/userHome/widget/horizontal_carousel.dart';
+import 'package:flutter_netflix_clone/utils/image_assets.dart';
 
 class UserHomePage extends StatelessWidget {
   static const String keyRoute = "UserHomePage";
@@ -57,19 +58,61 @@ class UserHomePage extends StatelessWidget {
   }
 
   Widget _showUserMovies(List<MovieSection> movieSectionlist) {
-    return ListView.builder(
-      itemCount: movieSectionlist.length,
-      itemBuilder: (context, index) {
-        return HorizontalCarouselWidget(
-          section: movieSectionlist[index],
-        );
-      },
+    return Column(
+      children: [
+        _headerWithLogoAndSearch(),
+        Expanded(
+          child: ListView.builder(
+            itemCount: movieSectionlist.length,
+            itemBuilder: (context, index) {
+              return HorizontalCarouselWidget(
+                section: movieSectionlist[index],
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _headerWithLogoAndSearch() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 10),
+      child: Row(
+        children: [
+          const Image(
+            height: 40,
+            image: AssetImage(ImageAssets.imageNNetflix),
+          ),
+          Expanded(child: Container()),
+          const Image(
+            color: Colors.white,
+            height: 25,
+            image: AssetImage(
+              ImageAssets.imageSearch,
+            ),
+          ),
+          const SizedBox(width: 10,),
+          SizedBox(
+            height: 25,
+            width: 25,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(
+                user.avatarImage,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
   Widget _showLoading() {
     return const Center(
-      child: CircularProgressIndicator(color: Colors.red,),
+      child: CircularProgressIndicator(
+        color: Colors.red,
+      ),
     );
   }
 }

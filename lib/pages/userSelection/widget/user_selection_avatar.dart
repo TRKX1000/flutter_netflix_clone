@@ -23,10 +23,11 @@ class UserSelectionAvatar extends StatelessWidget {
         child: Column(
           children: [
             ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: Image.asset(
-                  user.avatarImage,
-                )),
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(
+                user.avatarImage,
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
