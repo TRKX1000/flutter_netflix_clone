@@ -65,23 +65,11 @@ class UserHomePage extends StatelessWidget {
         );
       },
     );
-
-    // ListView.builder(
-    //   itemCount: movieList.length,
-    //   itemBuilder: (context, index) {
-    //     return ListTile(
-    //       title: Text(
-    //         movieList[index].title,
-    //         style: const TextStyle(color: Colors.white),
-    //       ),
-    //     );
-    //   },
-    // ),
   }
 
   Widget _showLoading() {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(color: Colors.red,),
     );
   }
 }

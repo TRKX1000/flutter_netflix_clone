@@ -27,7 +27,6 @@ class _HorizontalCarouselWidgetState extends State<HorizontalCarouselWidget> {
         ),
         Container(
           height: 150,
-          color: Colors.red,
           child:
           ListView.builder(
               scrollDirection: Axis.horizontal,

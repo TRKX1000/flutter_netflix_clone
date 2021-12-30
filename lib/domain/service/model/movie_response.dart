@@ -1,6 +1,6 @@
 class MovieResponse {
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final int id;
   final String originalLanguage;
   final String originalTitle;
@@ -37,12 +37,12 @@ class MovieResponse {
       json['original_language'],
       json['original_title'],
       json['overview'],
-      json['popularity'],
+      json['popularity'].toDouble(),
       json['poster_path'],
       json['release_date'],
       json['title'],
       json['video'],
-      json['vote_average'],
+      json['vote_average'].toDouble(),
       json['vote_count'],
     );
   }

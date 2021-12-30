@@ -1,7 +1,7 @@
 import 'package:flutter_netflix_clone/domain/service/model/movie_response.dart';
 
 class Movie {
-  final String headerImage;
+  final String? headerImage;
   final String overview;
   final double popularity;
   final String posterPath;
