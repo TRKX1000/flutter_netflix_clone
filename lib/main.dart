@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_clone/di/locator.dart';
 import 'package:flutter_netflix_clone/router/app_router.dart';
 
 import 'data/user.dart';
 
 void main() {
+  setupDependencyInjection();
   runApp(const MyApp());
 }
 
@@ -20,8 +22,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: AppRouter(),
+    return MaterialApp(
+      theme: ThemeData(fontFamily: 'Netflix Sans'),
+      home: const AppRouter(),
     );
   }
 }
