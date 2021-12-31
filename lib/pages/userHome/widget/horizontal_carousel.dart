@@ -25,16 +25,19 @@ class _HorizontalCarouselWidgetState extends State<HorizontalCarouselWidget> {
           style: const TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        Container(
-          height: 150,
-          child:
-          ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: widget.section.movies.length,
-              itemBuilder: (context, index) {
-                return MovieThumb(movie: widget.section.movies[index]);
-              }),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: SizedBox(
+            height: 150,
+            child:
+            ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: widget.section.movies.length,
+                itemBuilder: (context, index) {
+                  return MovieThumb(movie: widget.section.movies[index]);
+                }),
+          ),
         ),
       ],
     );
