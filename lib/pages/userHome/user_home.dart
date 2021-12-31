@@ -58,17 +58,35 @@ class UserHomePage extends StatelessWidget {
   }
 
   Widget _showUserMovies(List<MovieSection> movieSectionlist) {
-    return Column(
-      children: [
-        _headerWithLogoAndSearch(),
-        Expanded(
-          child: ListView.builder(
-            itemCount: movieSectionlist.length,
-            itemBuilder: (context, index) {
+    return CustomScrollView(
+      slivers: [
+        // Add the app bar to the CustomScrollView.
+        SliverAppBar(
+          // collapsedHeight: 50,
+          toolbarHeight: 60,
+          pinned: false,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          floating: false,
+          flexibleSpace: FlexibleSpaceBar(
+            background: _headerWithLogoAndSearch(),
+          ),
+          // expandedHeight: 100,
+        ),
+        SliverPersistentHeader(
+          pinned: true,
+          floating: true,
+          //TODO ADD WIDGET WITH CATEGORIES
+          delegate: _SliverAppBarDelegate(Text("This is a test mesage")),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
               return HorizontalCarouselWidget(
                 section: movieSectionlist[index],
               );
             },
+            childCount: movieSectionlist.length,
           ),
         ),
       ],
@@ -78,31 +96,37 @@ class UserHomePage extends StatelessWidget {
   Widget _headerWithLogoAndSearch() {
     return Padding(
       padding: const EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 10),
-      child: Row(
+      child: Column(
         children: [
-          const Image(
-            height: 40,
-            image: AssetImage(ImageAssets.imageNNetflix),
-          ),
-          Expanded(child: Container()),
-          const Image(
-            color: Colors.white,
-            height: 25,
-            image: AssetImage(
-              ImageAssets.imageSearch,
-            ),
-          ),
-          const SizedBox(width: 10,),
-          SizedBox(
-            height: 25,
-            width: 25,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.asset(
-                user.avatarImage,
+          Row(
+            children: [
+              const Image(
+                height: 40,
+                image: AssetImage(ImageAssets.imageNNetflix),
               ),
-            ),
-          )
+              Expanded(child: Container()),
+              const Image(
+                color: Colors.white,
+                height: 25,
+                image: AssetImage(
+                  ImageAssets.imageSearch,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              SizedBox(
+                height: 25,
+                width: 25,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.asset(
+                    user.avatarImage,
+                  ),
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
@@ -114,5 +138,30 @@ class UserHomePage extends StatelessWidget {
         color: Colors.red,
       ),
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final Widget _tabBar;
+
+  @override
+  double get minExtent => 50;
+  @override
+  double get maxExtent => 50;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new Container(
+      color: Colors.white, // ADD THE COLOR YOU WANT AS BACKGROUND.
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }
