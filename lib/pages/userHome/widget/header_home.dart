@@ -19,15 +19,19 @@ class HeaderHome extends StatelessWidget {
                 image: AssetImage(ImageAssets.imageNNetflix),
               ),
               Expanded(child: Container()),
-              const Image(
-                color: Colors.white,
-                height: 25,
-                image: AssetImage(
-                  ImageAssets.imageSearch,
+              IconButton(
+                splashRadius: 20,
+                icon: const Image(
+                  color: Colors.white,
+                  height: 25,
+                  image: AssetImage(
+                    ImageAssets.imageSearch,
+                  ),
                 ),
+                onPressed: () => {},
               ),
               const SizedBox(
-                width: 10,
+                width: 15,
               ),
               SizedBox(
                 height: 25,
