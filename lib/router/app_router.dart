@@ -5,20 +5,21 @@ import 'package:flutter_netflix_clone/pages/userHome/user_home.dart';
 import 'package:flutter_netflix_clone/pages/userSelection/user_selection_page.dart';
 
 class AppRouter extends StatefulWidget {
-  const AppRouter({Key? key}) : super(key: key);
+  final GlobalKey<NavigatorState> navigatorKey;
+  const AppRouter({Key? key, required this.navigatorKey}) : super(key: key);
 
   @override
   State<AppRouter> createState() => _AppRouterState();
 }
 
 class _AppRouterState extends State<AppRouter> {
-  final navigatorKey = GlobalKey<NavigatorState>();
+
   User? userSelected;
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: navigatorKey,
+      key: widget.navigatorKey,
       pages: [
         MaterialPage(
           key: const ValueKey(UserSelectionPage.keyRoute),

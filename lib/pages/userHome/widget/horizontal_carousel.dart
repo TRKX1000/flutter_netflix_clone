@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_clone/data/movie.dart';
 import 'package:flutter_netflix_clone/data/movie_section.dart';
 import 'package:flutter_netflix_clone/pages/userHome/widget/movie_thumb.dart';
 
 class HorizontalCarouselWidget extends StatefulWidget {
   final MovieSection section;
+  final void Function(Movie) onMoviePressed;
 
-  const HorizontalCarouselWidget({Key? key, required this.section})
+  const HorizontalCarouselWidget(
+      {Key? key, required this.section, required this.onMoviePressed})
       : super(key: key);
 
   @override
@@ -29,13 +32,14 @@ class _HorizontalCarouselWidgetState extends State<HorizontalCarouselWidget> {
           padding: const EdgeInsets.only(bottom: 10),
           child: SizedBox(
             height: 150,
-            child:
-            ListView.builder(
+            child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: widget.section.movies.length,
                 itemBuilder: (context, index) {
-                  return MovieThumb(movie: widget.section.movies[index]);
+                  return MovieThumb(
+                      movie: widget.section.movies[index],
+                      onMoviePressed: widget.onMoviePressed);
                 }),
           ),
         ),

@@ -78,6 +78,11 @@ flutter:
     - assets/images/ic_avatar_4.png
     - assets/images/n_netflix.png
     - assets/images/image_search.png
+    - assets/images/image_age_0.png
+    - assets/images/image_age_7.png
+    - assets/images/image_age_12.png
+    - assets/images/image_age_16.png
+    - assets/images/image_age_18.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

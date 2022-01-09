@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_netflix_clone/bloc/movies/movies_bloc.dart';
+import 'package:flutter_netflix_clone/data/movie.dart';
 import 'package:flutter_netflix_clone/data/movie_section.dart';
 import 'package:flutter_netflix_clone/data/user.dart';
 import 'package:flutter_netflix_clone/pages/userHome/util/sliver_appbar_delegate.dart';
+import 'package:flutter_netflix_clone/pages/userHome/widget/bottom_sheet_movie_detail.dart';
 import 'package:flutter_netflix_clone/pages/userHome/widget/horizontal_carousel.dart';
 import 'package:flutter_netflix_clone/pages/userHome/widget/sub_header_home.dart';
 
@@ -40,7 +42,8 @@ class UserHomePage extends StatelessWidget {
                   }
                 case MoviesOkState:
                   {
-                    return _showUserMovies(state.moviesInfo.movieSections);
+                    return _showUserMovies(
+                        state.moviesInfo.movieSections, context);
                   }
                 default:
                   {
@@ -60,7 +63,8 @@ class UserHomePage extends StatelessWidget {
     ));
   }
 
-  Widget _showUserMovies(List<MovieSection> movieSectionlist) {
+  Widget _showUserMovies(
+      List<MovieSection> movieSectionlist, BuildContext context) {
     return CustomScrollView(
       slivers: [
         // Add the app bar to the CustomScrollView.
@@ -88,6 +92,9 @@ class UserHomePage extends StatelessWidget {
             (context, index) {
               return HorizontalCarouselWidget(
                 section: movieSectionlist[index],
+                onMoviePressed: (movie) {
+                  _showMovieInfo(movie, context);
+                },
               );
             },
             childCount: movieSectionlist.length,
@@ -103,5 +110,23 @@ class UserHomePage extends StatelessWidget {
         color: Colors.red,
       ),
     );
+  }
+
+  void _showMovieInfo(Movie movie, BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        barrierColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          return BottomSheetMovieDetail(
+            movie: movie,
+            onShowDetails: (movie) {
+
+            },
+            close: (){
+              Navigator.pop(context);
+            },
+          );
+        });
   }
 }

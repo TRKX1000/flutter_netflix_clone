@@ -19,23 +19,32 @@ class HeaderHome extends StatelessWidget {
                 image: AssetImage(ImageAssets.imageNNetflix),
               ),
               Expanded(child: Container()),
-              const Image(
-                color: Colors.white,
-                height: 25,
-                image: AssetImage(
-                  ImageAssets.imageSearch,
+              IconButton(
+                splashRadius: 20,
+                icon: const Image(
+                  color: Colors.white,
+                  height: 25,
+                  image: AssetImage(
+                    ImageAssets.imageSearch,
+                  ),
                 ),
+                onPressed: () => {},
               ),
               const SizedBox(
-                width: 10,
+                width: 15,
               ),
-              SizedBox(
-                height: 25,
-                width: 25,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Image.asset(
-                    avatarImage,
+              GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image.asset(
+                      avatarImage,
+                    ),
                   ),
                 ),
               )
