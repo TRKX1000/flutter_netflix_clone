@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_clone/data/movie.dart';
-import 'package:flutter_netflix_clone/pages/userHome/widget/movie_thumb.dart';
-import 'package:flutter_netflix_clone/pages/userHome/widget/movie_year_age_and_duration.dart';
 import 'package:flutter_netflix_clone/pages/widgets/button_icon_and_text.dart';
 import 'package:flutter_netflix_clone/pages/widgets/button_icon_and_text_vertical.dart';
 import 'package:flutter_netflix_clone/utils/colors.dart';
+
+import 'movie_thumb.dart';
+import 'movie_year_age_and_duration.dart';
 
 class BottomSheetMovieDetail extends StatelessWidget {
   final Movie movie;

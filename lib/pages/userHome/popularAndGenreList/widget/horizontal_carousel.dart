@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_clone/data/movie.dart';
 import 'package:flutter_netflix_clone/data/movie_section.dart';
-import 'package:flutter_netflix_clone/pages/userHome/widget/movie_thumb.dart';
+
+import 'movie_thumb.dart';
 
 class HorizontalCarouselWidget extends StatefulWidget {
   final MovieSection section;
