@@ -25,7 +25,9 @@ class ButtonIconAndText extends StatelessWidget {
           }
         },
       )),
-      onPressed: () {},
+      onPressed: () {
+        onClick();
+      },
       child: Center(
         child: Row(
           mainAxisSize: MainAxisSize.min,
