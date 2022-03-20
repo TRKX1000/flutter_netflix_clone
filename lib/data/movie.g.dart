@@ -17,36 +17,39 @@ class MovieAdapter extends TypeAdapter<Movie> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Movie(
-      fields[0] as String?,
-      fields[1] as String,
-      fields[2] as double,
-      fields[3] as String,
+      fields[0] as int,
+      fields[1] as String?,
+      fields[2] as String,
+      fields[3] as double,
       fields[4] as String,
       fields[5] as String,
-      fields[6] as double,
-      fields[7] as int,
+      fields[6] as String,
+      fields[7] as double,
+      fields[8] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Movie obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
-      ..write(obj.headerImage)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.overview)
+      ..write(obj.headerImage)
       ..writeByte(2)
-      ..write(obj.popularity)
+      ..write(obj.overview)
       ..writeByte(3)
-      ..write(obj.posterPath)
+      ..write(obj.popularity)
       ..writeByte(4)
-      ..write(obj.releaseDate)
+      ..write(obj.posterPath)
       ..writeByte(5)
-      ..write(obj.title)
+      ..write(obj.releaseDate)
       ..writeByte(6)
-      ..write(obj.voteAverage)
+      ..write(obj.title)
       ..writeByte(7)
+      ..write(obj.voteAverage)
+      ..writeByte(8)
       ..write(obj.voteCount);
   }
 

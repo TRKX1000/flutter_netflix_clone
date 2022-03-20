@@ -8,16 +8,27 @@ part 'movie.g.dart';
 
 @HiveType(typeId: hiveTypeMovie)
 class Movie {
-  @HiveField(0) final String? headerImage;
-  @HiveField(1) final String overview;
-  @HiveField(2) final double popularity;
-  @HiveField(3) final String posterPath;
-  @HiveField(4) final String releaseDate;
-  @HiveField(5) final String title;
-  @HiveField(6) final double voteAverage;
-  @HiveField(7) final int voteCount;
+  @HiveField(0)
+  final int id;
+  @HiveField(1)
+  final String? headerImage;
+  @HiveField(2)
+  final String overview;
+  @HiveField(3)
+  final double popularity;
+  @HiveField(4)
+  final String posterPath;
+  @HiveField(5)
+  final String releaseDate;
+  @HiveField(6)
+  final String title;
+  @HiveField(7)
+  final double voteAverage;
+  @HiveField(8)
+  final int voteCount;
 
   Movie(
+    this.id,
     this.headerImage,
     this.overview,
     this.popularity,
@@ -30,6 +41,7 @@ class Movie {
 
   static Movie convertServiceModelToDataModel(MovieResponse movieResponse) {
     return Movie(
+        movieResponse.id,
         movieResponse.backdropPath,
         movieResponse.overview,
         movieResponse.popularity,

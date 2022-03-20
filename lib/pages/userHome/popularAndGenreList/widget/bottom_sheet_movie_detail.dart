@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_netflix_clone/bloc/localMovies/local_movies_bloc.dart';
 import 'package:flutter_netflix_clone/data/movie.dart';
 import 'package:flutter_netflix_clone/pages/widgets/button_icon_and_text.dart';
 import 'package:flutter_netflix_clone/pages/widgets/button_icon_and_text_vertical.dart';
@@ -70,7 +72,7 @@ class BottomSheetMovieDetail extends StatelessWidget {
                                 Icons.clear,
                                 color: Colors.grey,
                               ),
-                              onPressed: (){
+                              onPressed: () {
                                 close();
                               },
                             )
@@ -80,9 +82,7 @@ class BottomSheetMovieDetail extends StatelessWidget {
                         SizedBox(
                           height: 80,
                           child: Text(movie.overview,
-                              overflow: TextOverflow.fade,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12)),
+                              overflow: TextOverflow.fade, style: const TextStyle(color: Colors.white, fontSize: 12)),
                         ),
                       ],
                     ),
@@ -101,18 +101,47 @@ class BottomSheetMovieDetail extends StatelessWidget {
                     onClick: () {},
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   flex: 1,
                   child: ButtonIconAndTextVertical(
                     icon: Icons.download_rounded,
                     text: "Download",
+                    onClick: () {},
                   ),
                 ),
-                const Expanded(
-                  flex: 1,
-                  child: ButtonIconAndTextVertical(
-                    icon: Icons.play_arrow_outlined,
-                    text: "Advance",
+                BlocProvider(
+                  create: (context) => LocalMoviesBloc(),
+                  child: BlocBuilder<LocalMoviesBloc, LocalMoviesState>(
+                    builder: (context, state) {
+                      switch (state.runtimeType) {
+                        case LocalMovieInitialState:
+                          {
+                            BlocProvider.of<LocalMoviesBloc>(context, listen: false).checkIfMovieIsInList(movie);
+                            return const CircularProgressIndicator();
+                          }
+                        case IsInMyListState:
+                          {
+                            bool isInList = state is IsInMyListState ? state.isInMyList : false;
+                            return Expanded(
+                              flex: 1,
+                              child: ButtonIconAndTextVertical(
+                                onClick: () {
+                                  var block = BlocProvider.of<LocalMoviesBloc>(context, listen: false);
+                                  if(isInList){
+                                    block.removeFromMyList(movie);
+                                  }else{
+                                    block.addMovieToMyList(movie);
+                                  }
+                                },
+                                icon: isInList ? Icons.remove : Icons.add,
+                                text: isInList ? "Remove" : "Add",
+                              ),
+                            );
+                          }
+                        default:
+                          return const CircularProgressIndicator();
+                      }
+                    },
                   ),
                 ),
               ],
@@ -138,12 +167,10 @@ class BottomSheetMovieDetail extends StatelessWidget {
                     ),
                     const Text(
                       "Details and more",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w300),
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
                     ),
                     Expanded(child: Container()),
-                    const Icon(Icons.arrow_forward_ios_outlined,
-                        color: Colors.white)
+                    const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white)
                   ],
                 ),
               ),

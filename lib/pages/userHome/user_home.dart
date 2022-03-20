@@ -13,14 +13,17 @@ class UserHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => MoviesBloc()),
-      ],
-          child: Scaffold(
-        backgroundColor: Colors.black,
-        body: PopularAndGenreList(user: user,),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => MoviesBloc()),
+        ],
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: PopularAndGenreList(
+            user: user,
+          ),
+        ),
       ),
-    ));
+    );
   }
 }
