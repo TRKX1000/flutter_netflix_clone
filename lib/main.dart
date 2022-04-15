@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_clone/domain/repository/user_logged_repository.dart';
 
 //3rd libraries
 import 'package:hive_flutter/hive_flutter.dart';
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
                 onUserClick: (user) {
                   setState(() {
                     userSelected = user;
+                    locator.get<UserLoggedRepository>().saverUser(user);
                   });
                 },
               ),
@@ -60,7 +62,7 @@ class _MyAppState extends State<MyApp> {
               return false;
             }
             userSelected = null;
-
+            locator.get<UserLoggedRepository>().deleteUser();
             return true;
           },
         );

@@ -4,6 +4,8 @@ import 'package:flutter_netflix_clone/bloc/movies/movies_bloc.dart';
 import 'package:flutter_netflix_clone/data/movie.dart';
 import 'package:flutter_netflix_clone/data/movie_section.dart';
 import 'package:flutter_netflix_clone/data/user.dart';
+import 'package:flutter_netflix_clone/di/locator.dart';
+import 'package:flutter_netflix_clone/domain/repository/user_logged_repository.dart';
 import 'package:flutter_netflix_clone/pages/userHome/util/sliver_appbar_delegate.dart';
 
 import 'widget/bottom_sheet_movie_detail.dart';
@@ -12,9 +14,8 @@ import 'widget/horizontal_carousel.dart';
 import 'widget/sub_header_home.dart';
 
 class PopularAndGenreList extends StatelessWidget {
-  final User user;
 
-  const PopularAndGenreList({Key? key, required this.user}) : super(key: key);
+  const PopularAndGenreList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +66,15 @@ class PopularAndGenreList extends StatelessWidget {
           automaticallyImplyLeading: false,
           floating: false,
           flexibleSpace: FlexibleSpaceBar(
-            background: HeaderHome(
-              avatarImage: user.avatarImage,
+            background: FutureBuilder(
+              future: locator.get<UserLoggedRepository>().getUser(),
+              builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+                if(snapshot.hasData && snapshot.data != null){
+                  return HeaderHome(avatarImage: snapshot.data?.avatarImage?? "");
+                }else{
+                  return Container();
+                }
+              }
             ),
           ),
           // expandedHeight: 100,
